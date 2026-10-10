@@ -1,0 +1,21 @@
+# Yii2 Basic: корень проекта → публичная директория web/
+# DocumentRoot = web/ (Docker, рекомендуется на проде) — этот файл не нужен.
+# DocumentRoot = корень проекта: запрос /sensor/receive проксируется в web/sensor/receive,
+# а в config/web.php задано request.baseUrl = '' — ссылки на сайте без /web/.
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+
+    # Уже внутри web/ — не трогаем
+    RewriteRule ^web/ - [L]
+
+    # Главная / — всегда в web/ (иначе -d срабатывает на DOCUMENT_ROOT → Forbidden)
+    RewriteRule ^$ web/ [L]
+
+    # Реальные файлы в корне (requirements.php и т.п.) — отдаём как есть
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Остальное → web/ (pretty URL, assets)
+    RewriteRule ^(.*)$ web/$1 [L]
+</IfModule>

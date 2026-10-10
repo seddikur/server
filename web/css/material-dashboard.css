@@ -1,0 +1,298 @@
+/*!
+ * Material Dashboard 3 - inspired styles (adapted for Yii2 / Bootstrap 5)
+ * Recreates the key visual elements of the Creative Tim Material Dashboard 3
+ * template (navbar blur, gradient buttons, outlined input groups, page header).
+ * Licensed under MIT (https://www.creative-tim.com/license)
+ */
+
+:root {
+    --md-dark: #344767;
+    --md-gradient-dark: linear-gradient(310deg, #141727 0%, #3a416f 100%);
+    --md-gradient-primary: linear-gradient(310deg, #7928ca 0%, #ff0080 100%);
+    --md-gray-200: #e9ecef;
+    --md-border-radius-xl: 0.75rem;
+    --md-border-radius-lg: 0.5rem;
+    --md-shadow-dark: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================================
+   Navbar (blur style)
+   ========================================================= */
+.navbar.blur {
+    -webkit-backdrop-filter: saturate(200%) blur(30px);
+    backdrop-filter: saturate(200%) blur(30px);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: var(--md-border-radius-xl);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.12);
+}
+
+[data-bs-theme="dark"] .navbar.blur {
+    background-color: rgba(20, 23, 39, 0.8);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+}
+
+.navbar.blur .navbar-brand {
+    color: var(--md-dark);
+    font-weight: 700;
+}
+
+[data-bs-theme="dark"] .navbar.blur .navbar-brand {
+    color: #fff;
+}
+
+.navbar.blur .nav-link {
+    color: var(--md-dark);
+    font-size: 0.875rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+[data-bs-theme="dark"] .navbar.blur .nav-link {
+    color: #fff;
+}
+
+.navbar.blur .nav-link i {
+    opacity: 0.6;
+    margin-right: 0.25rem;
+}
+
+.navbar.blur .nav-link.active {
+    font-weight: 600;
+}
+
+.navbar.blur .nav-link:hover {
+    color: #000;
+}
+
+[data-bs-theme="dark"] .navbar.blur .nav-link:hover {
+    color: #e9ecef;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn.bg-gradient-dark {
+    background-image: var(--md-gradient-dark);
+    border: 0;
+    box-shadow: var(--md-shadow-dark);
+    color: #fff;
+}
+
+.btn.bg-gradient-dark:hover {
+    background-image: var(--md-gradient-dark);
+    opacity: 0.9;
+    color: #fff;
+}
+
+.btn-outline-primary.btn-sm {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+}
+
+/* =========================================================
+   Page header (login background)
+   ========================================================= */
+.page-header {
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.page-header .mask {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.bg-gradient-dark {
+    background-image: var(--md-gradient-dark) !important;
+}
+
+.opacity-6 {
+    opacity: 0.6 !important;
+}
+
+.min-vh-100 {
+    min-height: 100vh !important;
+}
+
+/* =========================================================
+   Card / fadeIn animations
+   ========================================================= */
+.fadeIn3 {
+    animation: fadeIn3 0.6s ease both;
+}
+
+.fadeInBottom {
+    animation-name: fadeInBottom;
+}
+
+@keyframes fadeIn3 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInBottom {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.border-radius-lg {
+    border-radius: var(--md-border-radius-lg) !important;
+}
+
+.border-radius-xl {
+    border-radius: var(--md-border-radius-xl) !important;
+}
+
+.z-index-0 {
+    z-index: 0 !important;
+}
+
+.z-index-2 {
+    z-index: 2 !important;
+}
+
+.mt-n4 {
+    margin-top: -1.5rem !important;
+}
+
+.shadow-dark {
+    box-shadow: var(--md-shadow-dark) !important;
+}
+
+/* =========================================================
+   Outlined input groups (Material style)
+   ========================================================= */
+.input-group-outline {
+    position: relative;
+    border-radius: var(--md-border-radius-lg);
+    border: 1px solid #d2d6da;
+    background: transparent;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    padding: 0;
+}
+
+[data-bs-theme="dark"] .input-group-outline {
+    border-color: #42424a;
+}
+
+.input-group-outline .form-control {
+    border: 0;
+    background: transparent;
+    padding: 0.75rem 1rem;
+    height: auto;
+    box-shadow: none;
+    position: relative;
+    z-index: 1;
+}
+
+.input-group-outline .form-control:focus {
+    box-shadow: none;
+    background: transparent;
+}
+
+/* placeholder нужен только для :placeholder-shown — делаем его прозрачным */
+.input-group-outline .form-control::placeholder {
+    color: transparent;
+}
+
+.input-group-outline .form-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    color: #7b809a;
+    pointer-events: none;
+    font-size: 1rem;
+    line-height: 1.25;
+    background: transparent;
+    z-index: 2;
+    transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease, padding 0.2s ease;
+}
+
+/*
+ * Плавающий label.
+ * Сдвиг -0.625rem = половина строки: текст ложится ровно на верхний бордюр.
+ * Фон перекрывает линию border. overflow: hidden убран, поэтому ничего не обрезается.
+ */
+.input-group-outline.is-filled .form-label,
+.input-group-outline .form-control:focus ~ .form-label,
+.input-group-outline .form-control:not(:placeholder-shown) ~ .form-label {
+    transform: translateY(-0.625rem);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--md-dark);
+    background: var(--bs-body-bg, #fff);
+    padding: 0 0.35rem;
+    margin-left: 0.75rem;
+    line-height: 1.2;
+}
+
+[data-bs-theme="dark"] .input-group-outline.is-filled .form-label,
+[data-bs-theme="dark"] .input-group-outline .form-control:focus ~ .form-label,
+[data-bs-theme="dark"] .input-group-outline .form-control:not(:placeholder-shown) ~ .form-label {
+    color: #fff;
+    background: var(--bs-body-bg, #141727);
+}
+
+.input-group-outline.is-focused,
+.input-group-outline:focus-within {
+    border-color: var(--md-dark);
+    box-shadow: 0 0 0 1px var(--md-dark);
+}
+
+[data-bs-theme="dark"] .input-group-outline.is-focused,
+[data-bs-theme="dark"] .input-group-outline:focus-within {
+    border-color: #fff;
+    box-shadow: 0 0 0 1px #fff;
+}
+
+.input-group-outline.is-invalid {
+    border-color: var(--bs-danger);
+}
+
+/* Текст ошибки валидации под полем */
+.input-group-outline ~ .invalid-feedback,
+.input-group-outline + .invalid-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+}
+
+/* Material Dashboard form switch */
+.form-switch .form-check-input {
+    width: 2.5rem;
+    height: 1.25rem;
+}
+
+/* =========================================================
+   Fade-in utility
+   ========================================================= */
+.fadeIn {
+    animation: fadeIn 0.8s ease both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

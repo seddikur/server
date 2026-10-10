@@ -1,0 +1,474 @@
+/*!
+
+ * Стили админ-панели.
+ * Не пересекаются со стилями фронтового сайта (site.css).
+ */
+
+/* Контент-область админки: крошки уже дают отступ сверху */
+.admin-layout main.main-content > .container-fluid {
+    padding-top: 0;
+}
+
+/* =========================================================
+   Верхняя панель и хлебные крошки
+   ========================================================= */
+
+.admin-layout {
+    --admin-frame-offset: .75rem;
+}
+
+.admin-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    margin: var(--admin-frame-offset) 1rem 0;
+}
+
+.admin-topbar-bar {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    min-height: 3.25rem;
+    padding: .5rem 1rem;
+    background: #fff;
+    border: 1px solid var(--bs-border-color);
+    border-radius: .75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .06);
+}
+
+.admin-topbar-user {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-left: auto;
+    min-width: 0;
+    font-weight: 600;
+    color: var(--md-dark, #344767);
+}
+
+.admin-topbar-username {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-menu-toggle,
+.admin-sidenav-close {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: .5rem;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.admin-sidenav-close {
+    position: absolute;
+    top: .35rem;
+    right: .35rem;
+    z-index: 2;
+}
+
+.admin-menu-toggle .material-symbols-rounded,
+.admin-sidenav-close .material-symbols-rounded {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.admin-breadcrumbs {
+    padding: .85rem 1.25rem 0;
+}
+
+.admin-breadcrumbs .breadcrumb {
+    margin: 0;
+    background: transparent;
+}
+
+.admin-breadcrumbs .breadcrumb-item,
+.admin-breadcrumbs .breadcrumb-item a {
+    font-size: .875rem;
+    color: var(--bs-secondary-color);
+    text-decoration: none;
+}
+
+.admin-breadcrumbs .breadcrumb-item.active {
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .admin-topbar-bar {
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+}
+
+[data-bs-theme="dark"] .admin-topbar-user {
+    color: var(--bs-body-color);
+}
+
+.admin-sidenav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1035;
+    background: rgba(15, 23, 42, .45);
+}
+
+.admin-sidenav-backdrop[hidden] {
+    display: none;
+}
+
+/* =========================================================
+   Боковое меню (sidenav) в стиле Material Dashboard
+   ========================================================= */
+
+.admin-layout .sidenav {
+    position: fixed;
+    top: var(--admin-frame-offset);
+    bottom: var(--admin-frame-offset);
+    left: 0;
+    z-index: 1030;
+    width: 250px;
+    max-width: 250px;
+    /* my-2 в Bootstrap задаёт margin с !important и опускает меню ниже навбара */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    overflow-y: auto;
+    user-select: none;
+    transition: transform .25s ease, opacity .25s ease;
+
+    /* Вертикальная раскладка: шапка и меню — сверху, футер — внизу */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+}
+
+/* Контент сдвигается вправо на ширину сайдбара (desktop).
+   На полноширинных страницах (логин) класса has-sidenav нет — фон на всю ширину. */
+@media (min-width: 1200px) {
+    .admin-layout.has-sidenav .main-content {
+        margin-left: 266px;
+    }
+}
+
+/* На экранах < 1200px сайдбар выезжает поверх контента по клику */
+@media (max-width: 1199.98px) {
+    .admin-menu-toggle,
+    .admin-sidenav-close {
+        display: inline-flex;
+    }
+
+    .admin-topbar {
+        margin: 0;
+    }
+
+    .admin-topbar-bar {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+    }
+
+    .admin-breadcrumbs {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .admin-layout .sidenav {
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin: 0 !important;
+        width: min(18rem, 88vw);
+        max-width: none;
+        border-radius: 0;
+        z-index: 1040;
+        transform: translateX(-105%);
+        opacity: 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+    }
+
+    .admin-layout.sidenav-open .sidenav {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .admin-layout.sidenav-open {
+        overflow: hidden;
+    }
+
+    .admin-layout main.main-content > .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+/* Телефон: колонка вместо сжатого десктопа */
+@media (max-width: 767.98px) {
+    .admin-layout,
+    .admin-layout .main-content {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .admin-logs-toolbar,
+    .admin-logs-filters,
+    .admin-logs-clear {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+        width: 100%;
+    }
+
+    .admin-logs-field,
+    .admin-logs .form-select,
+    .admin-logs .btn,
+    .admin-logs-clear {
+        width: 100%;
+    }
+
+    .admin-logs .card-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+    }
+
+    .admin-logs .log-line {
+        font-size: 12px;
+    }
+
+    .admin-crud > .d-flex,
+    .admin-crud > .d-flex .d-flex {
+        flex-direction: column;
+        align-items: stretch !important;
+    }
+
+    .admin-crud .btn {
+        width: 100%;
+    }
+
+    .admin-dashboard .row > [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Рамка и мягкая тень белого сайдбара */
+.admin-layout .sidenav.bg-white {
+    border: 1px solid var(--bs-border-color);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+}
+
+.admin-layout .sidenav .sidenav-header {
+    position: relative;
+    flex: 0 0 auto;
+    padding: .5rem 0;
+}
+
+.admin-layout .sidenav hr.horizontal {
+    flex: 0 0 auto;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--bs-border-color);
+    opacity: .5;
+}
+
+/* Обёртка списка: прижата к верху, не растягивается по высоте */
+.admin-layout .sidenav #sidenav-collapse-main {
+    flex: 0 0 auto;
+    display: block;
+    overflow: visible;
+}
+
+.admin-layout .sidenav .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 0;
+    padding: 0 .5rem;
+    list-style: none;
+}
+
+.admin-layout .sidenav .nav-item {
+    width: 100%;
+}
+
+.admin-layout .sidenav .nav-link {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 2px 0;
+    padding: .55rem .75rem;
+    font-size: .875rem;
+    font-weight: 500;
+    color: var(--md-dark, #344767);
+    border-radius: var(--md-border-radius-lg, .5rem);
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.admin-layout .sidenav .nav-link:hover {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.admin-layout .sidenav .nav-link .material-symbols-rounded {
+    font-size: 1.25rem;
+    line-height: 1;
+    opacity: .7;
+}
+
+.admin-layout .sidenav .nav-link.active {
+    color: #fff;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .2);
+}
+
+.admin-layout .sidenav .nav-link.active .material-symbols-rounded {
+    opacity: 1;
+}
+
+.admin-layout .sidenav .sidenav-footer {
+    position: static !important;
+    margin-top: auto;
+    flex: 0 0 auto;
+    padding: 1rem 0;
+}
+
+/* Тёмная тема: сайдбар */
+[data-bs-theme="dark"] .admin-layout .sidenav.bg-white {
+    background-color: var(--bs-body-bg) !important;
+    border-color: var(--bs-border-color) !important;
+}
+
+[data-bs-theme="dark"] .admin-layout .sidenav .nav-link {
+    color: #d2d3d4;
+}
+
+[data-bs-theme="dark"] .admin-layout .sidenav .nav-link:hover {
+    background-color: rgba(255, 255, 255, .08);
+}
+
+/* Карточка входа в админ-панель */
+.admin-layout .card {
+    backdrop-filter: blur(6px);
+}
+
+/* Бейдж роли в navbar */
+.admin-layout .badge.bg-gradient-dark {
+    background-image: var(--md-gradient-dark, linear-gradient(310deg, #141727 0%, #3a416f 100%));
+    border: 0;
+}
+
+/* Дашборд: карточки-разделы */
+.admin-dashboard .card {
+    transition: transform .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.admin-dashboard .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .12) !important;
+}
+
+/* Тёмная тема: карточки дашборда */
+[data-bs-theme="dark"] .admin-dashboard .card {
+    background-color: var(--bs-body-bg);
+    box-shadow: 0 0 0 1px var(--bs-border-color), 0 2px 8px rgba(0, 0, 0, .3);
+}
+
+[data-bs-theme="dark"] .admin-dashboard .card:hover {
+    box-shadow: 0 0 0 1px var(--bs-border-color), 0 8px 24px rgba(0, 0, 0, .4) !important;
+}
+
+.admin-layout .sidenav .nav-section {
+    padding: 1rem 1.25rem .25rem;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #8392ab;
+}
+
+.admin-crud .grid-view {
+    overflow-x: auto;
+}
+
+.admin-crud-action {
+    color: inherit;
+    text-decoration: none;
+}
+
+.admin-crud-action .material-symbols-rounded {
+    font-size: 1.25rem;
+    vertical-align: middle;
+}
+
+.admin-detail th {
+    width: 16rem;
+    white-space: nowrap;
+}
+
+.admin-detail td {
+    word-break: break-word;
+}
+
+.admin-logs-toolbar,
+.admin-logs-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: .75rem;
+}
+
+.admin-logs-clear {
+    display: flex;
+    align-items: flex-end;
+}
+
+.admin-logs .log-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: #252525;
+    color: #fff;
+}
+
+.admin-logs .log-line {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #fff;
+    display: block;
+    line-height: 1.5;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.admin-logs .log-line:nth-child(odd) {
+    background-color: rgba(255, 255, 255, .03);
+}
+
+.admin-logs .log-light .log-line {
+    text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+}
+
+.admin-logs .log-error {
+    color: #ff5252 !important;
+    font-weight: 700;
+}
+
+.admin-logs .log-warning {
+    color: #ffca28 !important;
+    font-weight: 700;
+}
+
+.admin-logs .log-info {
+    color: #4fc3f7 !important;
+}
+
+.admin-logs #copy-log-btn .material-symbols-rounded {
+    font-size: 1rem;
+}
+
