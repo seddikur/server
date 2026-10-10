@@ -15,7 +15,6 @@ services:
       DB_NAME: mydb
       DB_USER: user
       DB_PASSWORD: password
-      XDEBUG_MODE: "off"
       YII_ENV: local
     command: >
       bash -c "test -f config/db.php || cp config/db.php.example config/db.php;
