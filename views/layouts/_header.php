@@ -16,8 +16,13 @@ $items = [
 // Вход/выход выносим в отдельный список, прижатый к правому краю
 $authItems = [
     [
+        'label' => 'AI-чат',
+        'url' => ['/chat'],
+        'visible' => !Yii::$app->user->isGuest,
+    ],
+    [
         'label' => '<i class="fa fa-key opacity-6 me-1"></i>Вход',
-        'url' => ['/admin/login'],
+        'url' => ['/login'],
         'visible' => Yii::$app->user->isGuest,
     ],
     [

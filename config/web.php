@@ -27,6 +27,9 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'modules' => [
+        'ollamaChat' => [
+            'class' => \app\modules\ollama_chat\Module::class,
+        ],
         'admin' => [
             'class' => \app\modules\admin\Module::class,
             // /admin и /admin/login ведут на default-контроллер модуля
@@ -40,6 +43,11 @@ $config = [
                 ],
                 'users' => [
                     'class' => \app\modules\users\Module::class,
+                ],
+                'ollamaChatAdmin' => [
+                    'class' => \app\modules\ollama_chat\Module::class,
+                    'layout' => '@app/modules/admin/views/layouts/main',
+                    'controllerNamespace' => 'app\modules\ollama_chat\controllers\admin',
                 ],
             ],
         ],
@@ -58,6 +66,14 @@ $config = [
         'user' => [
             'identityClass' => \app\modules\users\models\User::class,
             'enableAutoLogin' => true,
+            'loginUrl' => ['login'],
+        ],
+        'ollama' => [
+            'class' => \app\modules\ollama_chat\components\OllamaClient::class,
+            'baseUrl' => $params['ollama']['url'],
+            'model' => $params['ollama']['model'],
+            'timeout' => (int) $params['ollama']['timeout'],
+            'temperature' => (float) ($params['ollama']['temperature'] ?? 0.7),
         ],
         // Отдельная identity-сессия для админов, не конфликтует с фронтовым user
         'adminUser' => [
@@ -111,6 +127,9 @@ $config = [
                 'admin/user' => 'admin/users/user/index',
                 'admin/user/<action:\w+>/<id:\d+>' => 'admin/users/user/<action>',
                 'admin/user/<action:\w+>' => 'admin/users/user/<action>',
+                'admin/chat-messages' => 'admin/ollamaChatAdmin/chat-message/index',
+                'admin/chat-messages/<action:\w+>/<id:\d+>' => 'admin/ollamaChatAdmin/chat-message/<action>',
+                'admin/chat-messages/<action:\w+>' => 'admin/ollamaChatAdmin/chat-message/<action>',
                 // Остальные маршруты модуля: /admin/<controller>/<action>
                 'admin/<controller>/<action>' => 'admin/<controller>/<action>',
                 'admin/<controller>' => 'admin/<controller>/index',
@@ -120,6 +139,8 @@ $config = [
                 'about' => 'site/about',
                 'login' => 'site/login',
                 'logout' => 'site/logout',
+                'chat' => 'ollamaChat/chat/index',
+                'chat/<action:\w+>' => 'ollamaChat/chat/<action>',
                 'error' => 'site/error',
                 // Главная
                 '' => 'site/index',

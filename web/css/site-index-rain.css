@@ -1,0 +1,115 @@
+.site-index {
+    position: relative;
+}
+
+.site-index-rain-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.site-index-rain-scene #rainyday-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.site-index-rain-scene canvas {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.site-index-rain-content {
+    position: relative;
+    z-index: 1;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--app-navbar-height) 1.5rem 2rem;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+
+.site-index-aphorism-stack {
+    position: relative;
+    width: 100%;
+    max-width: 42rem;
+    min-height: 5.5em;
+}
+
+.site-index-aphorism-stack > .site-index-aphorism {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    margin: 0 !important;
+    padding: 0;
+    font-size: clamp(1.15rem, 3.2vw, 1.65rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.55;
+    letter-spacing: 0.02em;
+    opacity: 0;
+    visibility: hidden;
+    filter: blur(14px);
+    transform: scale(1.04);
+    transition:
+        opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 1.4s;
+    will-change: opacity, filter, transform;
+    pointer-events: none;
+}
+
+.site-index-aphorism-stack > .site-index-aphorism.is-active,
+.site-index-aphorism-stack > .site-index-aphorism.is-exiting {
+    visibility: visible;
+    transition:
+        opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 1.4s cubic-bezier(0.4, 0, 0.2, 1),
+        visibility 0s linear 0s;
+}
+
+.site-index-aphorism-stack > .site-index-aphorism.is-active {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+    z-index: 2;
+}
+
+.site-index-aphorism-stack > .site-index-aphorism.is-exiting {
+    opacity: 0;
+    filter: blur(14px);
+    transform: scale(1.04);
+    z-index: 1;
+}
+
+.site-index-aphorism-stack > .site-index-aphorism.is-idle {
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-index-aphorism-stack > .site-index-aphorism {
+        filter: none;
+        transform: none;
+        transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    }
+
+    .site-index-aphorism-stack > .site-index-aphorism.is-active,
+    .site-index-aphorism-stack > .site-index-aphorism.is-exiting {
+        transition: opacity 0.5s ease, visibility 0s linear 0s;
+    }
+}

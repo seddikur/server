@@ -23,7 +23,11 @@ $this->render('_head');
 
 <?= $this->render('_header') ?>
 
-<main id="main" class="flex-grow-1" role="main">
+<main
+    id="main"
+    class="flex-grow-1<?= !empty($this->params['fullWidth']) ? ' full-width-content' : '' ?>"
+    role="main"
+>
     <?php if (!empty($this->params['fullWidth'])): ?>
         <?= Alert::widget() ?>
         <?= $content ?>

@@ -6,6 +6,7 @@
 | `modules/log/` | Просмотр и очистка файлов логов — [README](modules/log/README.md) |
 | `modules/setting/` | Настройки сайта (ключ — значение) — [README](modules/setting/README.md) |
 | `modules/users/` | Пользователи сайта, вход, login_record — [README](modules/users/README.md) |
+| `modules/ollama_chat/` | AI-чат (Ollama) для авторизованных пользователей — [README](modules/ollama_chat/README.md) |
 
 Подключаемые модули регистрируются вложенными в `admin` (`config/web.php`).
 
@@ -44,11 +45,12 @@ URL: http://localhost:8080/admin/login
 
 Создаются командой `php yii user/init` (после `php yii rbac/init`).
 
-| Логин | Пароль | Роль RBAC |
-|-------|--------|-----------|
-| `manager@example.com` / `+79999999998` | `manager` | moder |
-| `user@example.com` / `+79999999997` | `user123` | user |
+**Вход на сайте — только по телефону** (поле «Телефон» на `/login`). Email в таблице ниже — справочно, для входа не используется. Допустимы варианты вроде `89999999998` — номер приводится к `+7…`.
 
+| Телефон (логин) | Email | Пароль | Роль RBAC |
+|-----------------|-------|--------|-----------|
+| `+79999999998` | `manager@example.com` | `manager` | moder |
+| `+79999999997` | `user@example.com` | `user123` | user |
 
-URL: http://localhost:8080/login
-curl -I https://lk.ibatele.com/api/v1/balance -H "ed403b001ae9e5889f47edb21389f3eb865c72a9d0f26cab06ebfc9150a5cbe9"
+- Вход: http://localhost:8080/login  
+- После входа: http://localhost:8080/chat (AI-чат)

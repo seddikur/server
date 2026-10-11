@@ -43,6 +43,11 @@ return [
         'settings.create',
         'settings.update',
         'settings.delete',
+        'chat-message.index',
+        'chat-message.view',
+        'chat-message.delete',
+        'chat-message.bulk-delete',
+        'chat-message.truncate',
     ],
 
     'role_permissions' => [

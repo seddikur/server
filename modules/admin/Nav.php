@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace app\modules\admin;
 
 use app\modules\log\NavItem as LogNavItem;
+use app\modules\ollama_chat\NavItem as OllamaChatNavItem;
 use app\modules\setting\NavItem as SettingNavItem;
 use app\modules\users\NavItem as UsersNavItem;
 
@@ -29,6 +30,7 @@ final class Nav
         return [
             SettingNavItem::forAdmin(),
             UsersNavItem::forAdmin(),
+            OllamaChatNavItem::forAdmin(),
             [
                 'group' => 'Сайт',
                 'label' => 'Администраторы',
