@@ -6,7 +6,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\ContactForm;
-use app\models\LoginForm;
+use app\modules\users\models\LoginForm;
 use yii\captcha\CaptchaAction;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

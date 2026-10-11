@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /** @var yii\web\View $this */
-/** @var app\models\AdminUser|null $admin */
+/** @var \app\modules\admin\models\AdminUser|null $admin */
 
 use app\modules\admin\Nav;
 use yii\helpers\Html;
@@ -19,7 +19,7 @@ $admin = $admin ?? Yii::$app->adminUser->identity;
             <p class="text-body-secondary mb-0">
                 Роль:
                 <span class="badge bg-gradient-dark">
-                    <?= Html::encode($admin instanceof \app\models\AdminUser ? $admin->getRoleLabel() : '—') ?>
+                    <?= Html::encode($admin instanceof \app\modules\admin\models\AdminUser ? $admin->getRoleLabel() : '—') ?>
                 </span>
             </p>
         </div>

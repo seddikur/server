@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\modules\admin\models\search;
 
-use app\models\AdminUser;
+use app\modules\admin\models\AdminUser;
 use yii\data\ActiveDataProvider;
 
 class AdminUserSearch extends AdminUser

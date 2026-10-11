@@ -10,9 +10,11 @@ use app\modules\admin\Nav;
 
 $controller = Yii::$app->controller;
 $currentController = $controller?->id ?? '';
+$currentModuleId = $controller?->module?->id ?? '';
 
-$navLinkClass = static function (string $ctrl) use ($currentController): string {
-    $isActive = $currentController === $ctrl;
+$navLinkClass = static function (array $item) use ($currentController, $currentModuleId): string {
+    $moduleId = $item['moduleId'] ?? 'admin';
+    $isActive = $currentController === $item['controller'] && $currentModuleId === $moduleId;
 
     return 'nav-link ' . ($isActive ? 'active bg-gradient-dark text-white' : 'text-dark');
 };
@@ -37,7 +39,7 @@ $items = Nav::items();
     <div class="w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link <?= $currentController === 'default' ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
+                <a class="nav-link <?= $currentController === 'default' && $currentModuleId === 'admin' ? 'active bg-gradient-dark text-white' : 'text-dark' ?>"
                    href="<?= Yii::getAlias('@web/admin') ?>">
                     <i class="material-symbols-rounded opacity-5">dashboard</i>
                     <span class="nav-link-text ms-1">Дашборд</span>
@@ -53,7 +55,7 @@ $items = Nav::items();
                     </li>
                 <?php endif; ?>
                 <li class="nav-item">
-                    <a class="<?= $navLinkClass($item['controller']) ?>" href="<?= \yii\helpers\Url::to($item['url']) ?>">
+                    <a class="<?= $navLinkClass($item) ?>" href="<?= \yii\helpers\Url::to($item['url']) ?>">
                         <i class="material-symbols-rounded opacity-5"><?= Html::encode($item['icon']) ?></i>
                         <span class="nav-link-text ms-1"><?= Html::encode($item['label']) ?></span>
                     </a>

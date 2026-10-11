@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\modules\admin\models;
 
-use app\models\AdminUser;
+use app\modules\admin\models\AdminUser;
 use Yii;
 use yii\base\Model;
 

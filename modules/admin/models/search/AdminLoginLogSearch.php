@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\modules\admin\models\search;
 
-use app\models\AdminLoginLog;
+use app\modules\admin\models\AdminLoginLog;
 use yii\data\ActiveDataProvider;
 
 class AdminLoginLogSearch extends AdminLoginLog

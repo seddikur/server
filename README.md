@@ -1,3 +1,13 @@
+## Модули
+
+| Каталог | Назначение |
+|---------|------------|
+| `modules/admin/` | Админ-панель: layout, AdminUser, роли, миграции — [README](modules/admin/README.md) |
+| `modules/log/` | Просмотр и очистка файлов логов — [README](modules/log/README.md) |
+| `modules/setting/` | Настройки сайта (ключ — значение) — [README](modules/setting/README.md) |
+| `modules/users/` | Пользователи сайта, вход, login_record — [README](modules/users/README.md) |
+
+Подключаемые модули регистрируются вложенными в `admin` (`config/web.php`).
 
 ## Cron
 

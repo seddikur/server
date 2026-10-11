@@ -17,7 +17,7 @@ services:
       DB_PASSWORD: password
       YII_ENV: local
     command: >
-      bash -c "test -f config/db.php || cp config/db.php.example config/db.php;
+      bash -c "test -f config/db-local.php || cp config/db-local.php.example config/db-local.php;
       php-fpm"
     networks:
       - yii2_net

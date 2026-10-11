@@ -32,7 +32,7 @@ return [
             'showScriptName' => true,
         ],
         'user' => [
-            'identityClass' => \app\models\User::class,
+            'identityClass' => \app\modules\users\models\User::class,
         ],
         'request' => [
             'cookieValidationKey' => 'test',

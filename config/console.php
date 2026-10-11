@@ -2,9 +2,6 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$avito = require __DIR__ . '/avito.php';
-
-$params = array_merge($params, $avito['params']);
 
 $config = [
     'id' => 'basic-console',
@@ -44,17 +41,10 @@ $config = [
         'db' => $db,
     ],
     'params' => $params,
-    /*
     'controllerMap' => [
-        'fixture' => [ // Fixture generation command line.
-            'class' => 'yii\faker\FixtureController',
-        ],
+        'user' => \app\modules\users\commands\UserController::class,
     ],
-    */
 ];
-
-// Компоненты интеграции с API Avito
-$config['components'] = array_merge($config['components'], $avito['components']);
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment

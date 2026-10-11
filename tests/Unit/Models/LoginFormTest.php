@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\tests\Unit\Models;
 
-use app\models\LoginForm;
+use app\modules\users\models\LoginForm;
 use Yii;
 use yii\base\Security;
 

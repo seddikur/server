@@ -8,24 +8,25 @@ use app\assets\AppAsset;
 use yii\web\AssetBundle;
 
 /**
- * Asset bundle админ-панели.
- *
- * Наследует фронтовые ассеты (Bootstrap, иконки, Material Dashboard)
- * и добавляет собственные стили админки.
+ * Стили и скрипты админ-панели (каталог modules/admin/assets).
  */
 class AdminAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@app/modules/admin/assets';
+
+    /** @var list<string> */
     public $css = [
-        'css/material-symbols-rounded.css',
         'css/admin.css',
     ];
+
+    /** @var list<string> */
     public $js = [
         'js/admin.js',
     ];
+
+    /** @var list<class-string<AssetBundle>> */
     public $depends = [
         AppAsset::class,
+        MaterialSymbolsAsset::class,
     ];
 }
-

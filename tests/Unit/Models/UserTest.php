@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\tests\Unit\Models;
 
-use app\models\User;
+use app\modules\users\models\User;
 
 final class UserTest extends \Codeception\Test\Unit
 {

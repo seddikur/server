@@ -2,17 +2,15 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-$avito = require __DIR__ . '/avito.php';
 
 // Роли и права админ-панели (поле admin_users.role)
-$params['adminRoles'] = require __DIR__ . '/admin-roles.php';
-$params = array_merge($params, $avito['params']);
+$params['adminRoles'] = require __DIR__ . '/../modules/admin/config/roles.php';
 
 $config = [
     'id' => 'basic',
     'name' => 'СЕРВЕР',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['logShutdownWipe', 'log'],
     // Привязка интерфейса почты к конкретной реализации (symfonymailer)
     'container' => [
         'singletons' => [
@@ -33,9 +31,23 @@ $config = [
             'class' => \app\modules\admin\Module::class,
             // /admin и /admin/login ведут на default-контроллер модуля
             'defaultRoute' => 'default',
+            'modules' => [
+                'log' => [
+                    'class' => \app\modules\log\Module::class,
+                ],
+                'setting' => [
+                    'class' => \app\modules\setting\Module::class,
+                ],
+                'users' => [
+                    'class' => \app\modules\users\Module::class,
+                ],
+            ],
         ],
     ],
     'components' => [
+        'logShutdownWipe' => [
+            'class' => \app\modules\log\LogShutdownWipe::class,
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'MiOF34W1J_sAn5nugj6U6aVakorBSoSt',
@@ -44,13 +56,13 @@ $config = [
             'class' => \yii\caching\FileCache::class,
         ],
         'user' => [
-            'identityClass' => \app\models\User::class,
+            'identityClass' => \app\modules\users\models\User::class,
             'enableAutoLogin' => true,
         ],
         // Отдельная identity-сессия для админов, не конфликтует с фронтовым user
         'adminUser' => [
             'class' => \yii\web\User::class,
-            'identityClass' => \app\models\AdminUser::class,
+            'identityClass' => \app\modules\admin\models\AdminUser::class,
             'enableAutoLogin' => true,
             'loginUrl' => ['/admin/login'],
             'identityCookie' => ['name' => '_adminIdentity', 'httpOnly' => true],
@@ -91,6 +103,14 @@ $config = [
                 'admin' => 'admin/default/index',
                 'admin/login' => 'admin/default/login',
                 'admin/logout' => 'admin/default/logout',
+                'admin/logs' => 'admin/log/logs/index',
+                'admin/logs/<action:\w+>' => 'admin/log/logs/<action>',
+                'admin/settings' => 'admin/setting/settings/index',
+                'admin/settings/<action:\w+>/<id:\d+>' => 'admin/setting/settings/<action>',
+                'admin/settings/<action:\w+>' => 'admin/setting/settings/<action>',
+                'admin/user' => 'admin/users/user/index',
+                'admin/user/<action:\w+>/<id:\d+>' => 'admin/users/user/<action>',
+                'admin/user/<action:\w+>' => 'admin/users/user/<action>',
                 // Остальные маршруты модуля: /admin/<controller>/<action>
                 'admin/<controller>/<action>' => 'admin/<controller>/<action>',
                 'admin/<controller>' => 'admin/<controller>/index',
@@ -109,9 +129,6 @@ $config = [
     ],
     'params' => $params,
 ];
-
-// Компоненты интеграции с API Avito
-$config['components'] = array_merge($config['components'], $avito['components']);
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment

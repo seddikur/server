@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace app\modules\admin\controllers;
 
-use app\models\AdminLoginLog;
+use app\modules\admin\models\AdminLoginLog;
 use app\modules\admin\helpers\Format;
 use app\modules\admin\helpers\Options;
 use app\modules\admin\models\search\AdminLoginLogSearch;

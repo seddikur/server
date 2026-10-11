@@ -3,35 +3,19 @@
 use yii\db\Migration;
 
 /**
- * Создается таблица «Пользователи» (клиенты сайта).
+ * Делегирует таблицу user модулю users.
  */
 class m250509_000001_create_user_table extends Migration
 {
-    const TABLE_NAME = 'user';
-
-    public function safeUp()
+    public function safeUp(): void
     {
-        $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB COMMENT "Пользователи"';
-        }
-
-        $this->createTable(self::TABLE_NAME, [
-            'id' => $this->primaryKey(),
-            'first_name' => $this->string(64)->notNull()->comment('Имя'),
-            'last_name' => $this->string(64)->notNull()->comment('Фамилия'),
-            'email' => $this->string(128)->notNull()->unique()->comment('Email'),
-            'phone' => $this->string(32)->notNull()->unique()->comment('Телефон (логин)'),
-            'password_hash' => $this->string()->notNull()->comment('Хеш пароля'),
-            'auth_key' => $this->string(32)->comment('Ключ авторизации'),
-            'status' => $this->smallInteger()->notNull()->defaultValue(0)->comment('Статус'),
-            'created_at' => $this->integer()->notNull()->comment('Дата создания'),
-            'updated_at' => $this->integer()->notNull()->comment('Дата обновления'),
-        ], $tableOptions);
+        require_once __DIR__ . '/../modules/users/migrations/m250509_000002_create_user_table.php';
+        (new m250509_000002_create_user_table(['db' => $this->db]))->safeUp();
     }
 
-    public function safeDown()
+    public function safeDown(): void
     {
-        $this->dropTable(self::TABLE_NAME);
+        require_once __DIR__ . '/../modules/users/migrations/m250509_000002_create_user_table.php';
+        (new m250509_000002_create_user_table(['db' => $this->db]))->safeDown();
     }
 }

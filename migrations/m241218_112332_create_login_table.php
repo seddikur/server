@@ -3,31 +3,19 @@
 use yii\db\Migration;
 
 /**
- * Таблица журнала входов пользователей сайта.
+ * Делегирует таблицу login_record модулю users.
  */
 class m241218_112332_create_login_table extends Migration
 {
-    const TABLE_NAME = 'login_record';
-
-    public function safeUp()
+    public function safeUp(): void
     {
-        $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB COMMENT "login_record"';
-        }
-
-        $this->createTable(self::TABLE_NAME, [
-            'id' => $this->primaryKey(),
-            'username' => $this->string()->notNull()->comment('Логин'),
-            'clientIp' => $this->string(64)->comment('Ip'),
-            'created_at' => $this->datetime()->notNull()->defaultExpression('CURRENT_TIMESTAMP')->comment('Дата и время'),
-        ], $tableOptions);
-
-        $this->createIndex('idx_login_record_created', self::TABLE_NAME, 'created_at');
+        require_once __DIR__ . '/../modules/users/migrations/m241218_112333_create_login_record_table.php';
+        (new m241218_112333_create_login_record_table(['db' => $this->db]))->safeUp();
     }
 
-    public function safeDown()
+    public function safeDown(): void
     {
-        $this->dropTable(self::TABLE_NAME);
+        require_once __DIR__ . '/../modules/users/migrations/m241218_112333_create_login_record_table.php';
+        (new m241218_112333_create_login_record_table(['db' => $this->db]))->safeDown();
     }
 }
