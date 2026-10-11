@@ -1,0 +1,85 @@
+.admin-logs-toolbar,
+.admin-logs-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: .75rem;
+}
+
+.admin-logs-clear {
+    display: flex;
+    align-items: flex-end;
+}
+
+.admin-logs .log-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    background-color: #252525;
+    color: #fff;
+}
+
+.admin-logs .log-line {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #fff;
+    display: block;
+    line-height: 1.5;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
+
+.admin-logs .log-line:nth-child(odd) {
+    background-color: rgba(255, 255, 255, .03);
+}
+
+.admin-logs .log-light .log-line {
+    text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+}
+
+.admin-logs .log-error {
+    color: #ff5252 !important;
+    font-weight: 700;
+}
+
+.admin-logs .log-warning {
+    color: #ffca28 !important;
+    font-weight: 700;
+}
+
+.admin-logs .log-info {
+    color: #4fc3f7 !important;
+}
+
+.admin-logs #copy-log-btn .material-symbols-rounded {
+    font-size: 1rem;
+}
+
+@media (max-width: 767.98px) {
+    .admin-logs-toolbar,
+    .admin-logs-filters,
+    .admin-logs-clear {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+        width: 100%;
+    }
+
+    .admin-logs-field,
+    .admin-logs .form-select,
+    .admin-logs .btn,
+    .admin-logs-clear {
+        width: 100%;
+    }
+
+    .admin-logs .card-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+    }
+
+    .admin-logs .log-line {
+        font-size: 12px;
+    }
+}
