@@ -105,7 +105,7 @@ class UserController extends CrudController
     protected function formFields(ActiveRecord $model): array
     {
         return [
-            'phone' => ['widget' => 'text'],
+            'phone' => ['widget' => 'phone'],
             'email' => ['widget' => 'text'],
             'first_name' => ['widget' => 'text'],
             'last_name' => ['widget' => 'text'],

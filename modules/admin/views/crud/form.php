@@ -61,6 +61,14 @@ use yii\bootstrap5\Html;
                                 'class' => 'form-control font-monospace',
                             ]);
                             break;
+                        case 'phone':
+                            $field = $field->textInput([
+                                'maxlength' => true,
+                                'data-phone-mask' => '1',
+                                'autocomplete' => 'tel',
+                                'inputmode' => 'tel',
+                            ]);
+                            break;
                         default:
                             $field = $field->textInput(['maxlength' => true]);
                     }
