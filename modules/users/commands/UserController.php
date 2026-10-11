@@ -20,18 +20,18 @@ class UserController extends Controller
         $this->createUser([
             'first_name' => 'Менеджер',
             'last_name' => 'Системы',
-            'email' => 'manager@example.com',
-            'phone' => '+79999999998',
-            'password' => 'manager',
+            'email' => 'm@example.com',
+            'phone' => '+70000000000',
+            'password' => 'secret321',
             'role' => 'moder',
         ]);
 
         $this->createUser([
             'first_name' => 'Тестовый',
             'last_name' => 'Пользователь',
-            'email' => 'user@example.com',
-            'phone' => '+79999999997',
-            'password' => 'user123',
+            'email' => 'u@example.com',
+            'phone' => '+70000000000',
+            'password' => 'secret123',
             'role' => 'user',
         ]);
 
