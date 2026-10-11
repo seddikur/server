@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace app\modules\admin;
 
+use app\modules\diagnostics\NavItem as DiagnosticsNavItem;
 use app\modules\log\NavItem as LogNavItem;
 use app\modules\ollama_chat\NavItem as OllamaChatNavItem;
 use app\modules\setting\NavItem as SettingNavItem;
@@ -50,6 +51,7 @@ final class Nav
                 'moduleId' => 'admin',
             ],
             LogNavItem::forAdmin(),
+            DiagnosticsNavItem::forAdmin(),
         ];
     }
 }

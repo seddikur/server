@@ -6,7 +6,8 @@ return [
     'senderName' => 'Example.com mailer',
 
     'ollama' => [
-        'url' => getenv('OLLAMA_URL') ?: 'http://91.236.252.80:11434',
+      //  'url' => getenv('OLLAMA_URL') ?: 'http://91.236.252.80:11434',
+        'url' => getenv('OLLAMA_URL') ?: 'http://localhost:11434',
         'model' => getenv('OLLAMA_MODEL') ?: 'qwen3-coder-30b-ctx',
         'timeout' => (int) (getenv('OLLAMA_TIMEOUT') ?: 300),
         'temperature' => 0.7,

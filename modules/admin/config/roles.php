@@ -48,6 +48,10 @@ return [
         'chat-message.delete',
         'chat-message.bulk-delete',
         'chat-message.truncate',
+        'diagnostics.index',
+        'diagnostics.json',
+        'diagnostics.health',
+        'diagnostics.test-ollama',
     ],
 
     'role_permissions' => [

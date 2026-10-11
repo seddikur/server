@@ -7,6 +7,7 @@
 | `modules/setting/` | Настройки сайта (ключ — значение) — [README](modules/setting/README.md) |
 | `modules/users/` | Пользователи сайта, вход, login_record — [README](modules/users/README.md) |
 | `modules/ollama_chat/` | AI-чат (Ollama) для авторизованных пользователей — [README](modules/ollama_chat/README.md) |
+| `modules/diagnostics/` | Тест Ollama в админке — [README](modules/diagnostics/README.md) |
 
 Подключаемые модули регистрируются вложенными в `admin` (`config/web.php`).
 

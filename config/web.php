@@ -49,6 +49,9 @@ $config = [
                     'layout' => '@app/modules/admin/views/layouts/main',
                     'controllerNamespace' => 'app\modules\ollama_chat\controllers\admin',
                 ],
+                'diagnostics' => [
+                    'class' => \app\modules\diagnostics\Module::class,
+                ],
             ],
         ],
     ],
@@ -130,6 +133,8 @@ $config = [
                 'admin/chat-messages' => 'admin/ollamaChatAdmin/chat-message/index',
                 'admin/chat-messages/<action:\w+>/<id:\d+>' => 'admin/ollamaChatAdmin/chat-message/<action>',
                 'admin/chat-messages/<action:\w+>' => 'admin/ollamaChatAdmin/chat-message/<action>',
+                'admin/diagnostics' => 'admin/diagnostics/diagnostics/index',
+                'admin/diagnostics/<action:\w+>' => 'admin/diagnostics/diagnostics/<action>',
                 // Остальные маршруты модуля: /admin/<controller>/<action>
                 'admin/<controller>/<action>' => 'admin/<controller>/<action>',
                 'admin/<controller>' => 'admin/<controller>/index',
